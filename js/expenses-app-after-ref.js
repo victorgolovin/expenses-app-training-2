@@ -1,8 +1,10 @@
 // ПОСЛЕ РЕФАКТОРИНГА
 
 const LIMIT = 10000;
-
-const expenses = [];
+const CURRENCY = 'руб.'; // 1 задаем конст на валюту для лучшей читаемости кода
+const STATUS_IN_LIMIT = 'Все хорошо'; // 2 задаем конст для статуса все хорошо
+const STATUS_OUT_OF_LIMIT = 'Все плохо'; // 3 задаем конст для статуса все плохо
+const STATUS_OUT_OF_LIMIT_CLASS_NAME = 'status-red'; // 4 задаем конст класса которой в CSS
 
 const inputNode = document.querySelector('.js-expense-input');
 const buttonNode = document.querySelector('.js-expense-button');
@@ -11,7 +13,13 @@ const sumNode = document.querySelector('.js-sum');
 const limitNode = document.querySelector('.js-limit');
 const statusNode = document.querySelector('.js-status');
 
-limitNode.innerText = LIMIT;
+const expenses = [];
+
+function initApp() { // 5 создаем функцию которая обьединяет по смыслу (на странице в браузере это - лимит, сум, статус)
+    limitNode.innerText = LIMIT; // 5 Переносим  в функцию
+    sumNode.innerText = 0; // // 5 Переносим  в функцию
+    statusNode.innerText = STATUS_IN_LIMIT; // 5 Переносим  в функцию
+}
 
 buttonNode.addEventListener('click', function() {
     // 1) Получаем значение из поля ввода
@@ -29,7 +37,7 @@ buttonNode.addEventListener('click', function() {
      // 3) Выведем новый список трат
     let expensesListHTML = '';
     expenses.forEach(element => {
-        const elementHTML = `<li>${element} руб.</li>`;
+        const elementHTML = `<li>${element} ${CURRENCY}</li>`;
         expensesListHTML += elementHTML;
     });
 
@@ -48,9 +56,9 @@ buttonNode.addEventListener('click', function() {
 
     // 5) Сравнение с лимитом и вывод статуса
     if (sum <= LIMIT) {
-        statusNode.innerText = 'Все хорошо';
+        statusNode.innerText = STATUS_IN_LIMIT;
     } else {
-        statusNode.innerText = 'Все плохо';
-        statusNode.classList.add('status-red');
+        statusNode.innerText = STATUS_OUT_OF_LIMIT;
+        statusNode.classList.add(STATUS_OUT_OF_LIMIT_CLASS_NAME);
     }
 });

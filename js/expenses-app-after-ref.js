@@ -84,3 +84,6 @@ function renderSum(expenses) { // 12 Создаем функцию renderSum, п
 function renderStatus () { // 14 Создаем функцию в которой 
 
 }
+
+
+//commit

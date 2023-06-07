@@ -8,25 +8,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <h1>Приложение для учета расходов</h1>
-    <input class="js-expense-input expens-input" 
-            type="number">
-    <button class="js-expense-button">Добавить</button>
+    <section class="expenses-app">
+        <div class="container">
+            <div class="expenses-app-wrapper">    
+                <div class="expenses-app-list">
+                    <h1 class="expenses-app-title">Приложение для учета расходов</h1>
+                    <input class="js-expense-input expens-input" 
+                    type="number">
+                    <button class="js-expense-button expense-button">Добавить</button>
 
     
-    <p>лимит: <span class="js-limit">10000</span> руб.</p> 
-    <p>сумма: <span class="js-sum"></span> руб.</p>
-    <p>статус: <span class="js-status status"></span></p> 
+                    <p class="limit-text">Лимит: <span class="js-limit limit">10000</span> руб.</p> 
+                    <p class="sum-text">сумма: <span class="js-sum sum"></span> руб.</p>
+                    <p class="status-text">статус: <span class="js-status status"></span></p> 
 
     
 
-    <h2>История трат:</h2>
-    <div class="js-history history-list"></div>
+                    <h2 class="history-title">История трат:</h2>
+                    <div class="js-history history-list"></div>
+
+                    <button class="js-expense-reset-button expense-reset-button">Сбросить расходы</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     
     <!-- <script src="js/expenses-app-no-ref.js"></script> -->
-    <script src="js/expenses-app-after-ref.js"></script>
+    <!-- <script src="js/expenses-app-after-ref.js"></script> -->
+    <script src="js/expenses-app-base.js"></script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.expenses-app-title,
+.history-title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 40px;
+}
+
+.expens-input {
+    width: 484px;
+    height: 59px;
+    margin-bottom: 20px;
+}
+
+.expense-button {
+    width: 370px;
+    height: 60px;
+    margin-bottom: 30px;
+}
+
+.limit-text,
+.sum-text,
+.status-text {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 10px;
+}
+
+.expense-reset-button {
+    width: 370px;
+    height: 60px;
+    margin-bottom: 30px;
+}
+
+
+
+

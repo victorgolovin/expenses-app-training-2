@@ -1,11 +1,14 @@
-// БАЗА
+// ПОСЛЕ РЕФАКТОРИНГА (С КОММЕНТАМИ) ЧАСТЬ 2
 
+
+// Объявление переменныйх - Строковых констант
 const LIMIT = 10000;
 const CURRENCY = 'руб.';
 const STATUS_IN_LIMIT = 'Все хорошо';
 const STATUS_OUT_OF_LIMIT = 'Все плохо';
 const STATUS_OUT_OF_LIMIT_CLASS_NAME = 'status-red';
 
+// Объявление переменныйх - ссылок на html элементы
 const inputNode = document.querySelector('.js-expense-input');
 const buttonNode = document.querySelector('.js-expense-button');
 const historyNode = document.querySelector('.js-history');
@@ -14,9 +17,17 @@ const limitNode = document.querySelector('.js-limit');
 const statusNode = document.querySelector('.js-status');
 const resetButtonNode = document.querySelector('.js-expense-reset-button');
 
+// Объявление нашей основной переменной 
+// При сапуске она содержит в себе пустой массив
+// Который мы пополняем по нажатию Добавить
 const expenses = [];
 
+// ---ФУНКЦИИ------------------------------------------------------------
+
+
 initApp(expenses);
+
+
 
 buttonNode.addEventListener('click', function() {
     const expense = getExpenseFromUser();
@@ -35,6 +46,28 @@ resetButtonNode.addEventListener('click', function() {
     renderHistory(expenses) === '';
     calculateExpenses(expenses) ===''
 })
+
+// Полсчитывает и возвращает сумму всех трат
+function calculateExpenses(expenses) {
+    let sum = 0;
+    expenses.forEach(element => {
+        // пробегаем по массиву обьектов expense
+        sum += element;
+    });
+
+    return sum;
+}
+
+// Отрисовывает/обновляет блок с "Всего", "Лимит", "Статус"
+function renderStatus (sum) {
+    // 
+    if (sum <= LIMIT) {
+        statusNode.innerText = STATUS_IN_LIMIT;
+    } else {
+        statusNode.innerText = STATUS_OUT_OF_LIMIT;
+        statusNode.classList.add(STATUS_OUT_OF_LIMIT_CLASS_NAME);
+    }
+}
 
 
 function initApp(expenses) {
@@ -66,16 +99,7 @@ function clearInput() {
     inputNode.value = '';
 }
 
-// 4) Посчитать сумму и вывести ее
-function calculateExpenses(expenses) {
-    let sum = 0;
 
-    expenses.forEach(element => {
-        sum += element;
-    });
-
-    return sum;
-}
 
 function render(expenses) {
     const sum = calculateExpenses(expenses);
@@ -101,13 +125,4 @@ function renderSum(sum) {
 }
 
 
-// 5) Сравнение с лимитом и вывод статуса
-function renderStatus (sum) {
 
-    if (sum <= LIMIT) {
-        statusNode.innerText = STATUS_IN_LIMIT;
-    } else {
-        statusNode.innerText = STATUS_OUT_OF_LIMIT;
-        statusNode.classList.add(STATUS_OUT_OF_LIMIT_CLASS_NAME);
-    }
-}

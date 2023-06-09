@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses App</title>
+</head>
+<body>
+    <h1>Учет расходов</h1>
+    <div class="expenses">
+        <div class="expensesInput">
+            <div class="moneyInput rub">
+                <input
+                class="moneyInput__input"
+                 type="number"
+                 min="1"
+                 id="expenseInput"
+                 />
+            </div>
+            <select id="categorySelect" class="categorySelect">
+                <option hidden disabled selected value="Категория">
+                    Категория
+                </option>
+                <option value="Продукты">Продукты</option>
+                <option value="Кафе">Кафе и рестораны</option>
+                <option>Квартира</option>
+                <option>Авто</option>
+            </select>
+        </div>
+
+        <button id="addButton" class="addButton">Добавить</button>
+
+        <div class="stats">
+            <div class="stats__limit">
+                <span class="label">Лимит:</span>
+                <span id="limitValue" class="rub">0</span>
+            </div>
+            <div class="stats__total">
+                <span class="label">Всего:</span>
+                <span id="totalValue" class="rub">0</span>
+            </div>
+            <div class="stats__status">
+                <span class="label">Статус:</span>
+                <span id="statusText" class="stats__statusText_positive">
+                    Все хорошо</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

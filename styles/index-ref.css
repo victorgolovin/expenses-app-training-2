@@ -1,0 +1,7 @@
+.stats__statusText_positive {
+    color: green;
+}
+
+.stats__statusText_negative {
+    color: red;
+}

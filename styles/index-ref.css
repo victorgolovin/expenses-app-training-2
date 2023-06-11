@@ -1,3 +1,18 @@
+body {
+    background-color: grey;
+}
+
+
+.expensesInput {
+    display: block;
+}
+
+.stats__changeLimitBtn {
+    width: 20px;
+    height: 20px;
+}
+
+
 .stats__statusText_positive {
     color: green;
 }

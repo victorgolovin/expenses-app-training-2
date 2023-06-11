@@ -1,9 +1,11 @@
-// ПОСЛЕ РЕФАКТОРИНГА (С КОММЕНТАМИ) ЧАСТЬ 2
+// ПОСЛЕ РЕФАКТОРИНГА (С КОММЕНТАМИ) ЧАСТЬ 2 + localStorage
 
 // Объявление переменныйх - Строковых констант
 const STATUS_IN_LIMIT = "Все хорошо";
 const STATUS_OUT_OF_LIMIT = "Все плохо";
 const CHANGE_LIMIT_TEXT = "Новый лимит";
+const STORAGE_LABAL_LIMIT = "limit";
+const STORAGE_LABAL_EXPENSES = "expenses";
 
 // Объявление переменныйх - ссылок на html элементы
 const inputNode = document.getElementById("expenseInput");
@@ -15,14 +17,33 @@ const statusNode = document.getElementById("statusText");
 const historyList = document.getElementById("historyList");
 const changeLimitBtn = document.getElementById("changeLimitBtn");
 
-// Получаем лимит из элемента HTML с id limitValue
 const limitNode = document.getElementById("limitValue");
 let limit = parseInt(limitNode.innerText);
+
+
+function initLimit() {
+  // Получаем лимит из элемента HTML с id limitValue
+
+  const limitFromStorage = parseInt(localStorage.getItem(STORAGE_LABAL_LIMIT));
+  if (!limitFromStorage) {
+    return;
+  }
+  limitNode.innerText = limitFromStorage;
+  limit = parseInt(limitNode.innerText);
+}
+
+initLimit()
 
 // Объявление нашей основной переменной
 // При сапуске она содержит в себе пустой массив
 // Который мы пополняем по нажатию Добавить
+const expensesFromStorageString = localStorage.getItem(STORAGE_LABAL_EXPENSES);
+const expensesFromStorage = JSON.parse(expensesFromStorageString);
 let expenses = [];
+if (Array.isArray(expensesFromStorage)) {
+    expenses = expensesFromStorage;
+}
+render();
 
 // ---ФУНКЦИИ------------------------------------------------------------
 
@@ -119,6 +140,11 @@ const clearInput = function (input) {
     input.value = "";
 }*/
 
+function saveExpensesToStorage() {
+    const expensesString = JSON.stringify(expenses);
+    localStorage.setItem(STORAGE_LABAL_EXPENSES, expensesString);
+}
+
 // Функция-обработчик которая будет вызвана при нажатии на кнопку Добавить
 function addButtonHandler() {
   // Сохраняем в переменную currentAmount(текущаяСумма) введите сумму
@@ -144,6 +170,8 @@ function addButtonHandler() {
   // Добавляем наш новыйРасход в массив расходов
   expenses.push(newExpense);
 
+  saveExpensesToStorage();
+
   // console.log(expenses);
 
   // перерисовываем интерфейс
@@ -152,6 +180,8 @@ function addButtonHandler() {
   // сбрасываем введенную сумму
   clearInput(inputNode);
 }
+
+
 
 // Функция-обработчик (хендлер) кнопки Сбросить расходы
 function clearButtonHandler() {
@@ -163,21 +193,22 @@ function clearButtonHandler() {
 function changeLimitHandler() {
   // в переменную newLimit мы записываем результат выполнения   функции prompt
   // которой передаем параметр "Новый лимит"
-  // prompt вызывает встроенную в браузер модалку с инпутом 
-  // а возвращает то что ввел в инпут пользователь 
+  // prompt вызывает встроенную в браузер модалку с инпутом
+  // а возвращает то что ввел в инпут пользователь
   const newLimit = prompt(CHANGE_LIMIT_TEXT);
 
   // потому-что там может быть строка
   const newLimitValue = parseInt(newLimit);
 
   if (!newLimitValue) {
-    return
+    return;
   }
 
-  // прописываем в html новое значение лимита   
+  // прописываем в html новое значение лимита
   limitNode.innerText = newLimitValue;
-  // а так же прописываем это значение в нашу   переменную с лимитом 
+  // а так же прописываем это значение в нашу   переменную с лимитом
   limit = newLimitValue;
+  localStorage.setItem(STORAGE_LABAL_LIMIT, newLimitValue);
 
   // обновляем интерфейс
   render();
